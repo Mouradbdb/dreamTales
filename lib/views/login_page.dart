@@ -34,21 +34,25 @@ class LoginPage extends StatelessWidget {
                   obscureText: true,
                 ),
                 SizedBox(height: 20),
-                MyButton(
-                  onTap: () async {
-                    await authController.signIn(
-                      emailController.text.trim(),
-                      passwordController.text.trim(),
-                    );
-                  },
-                  text: "Login",
-                ),
+                Obx(() {
+                  return
+                      // Show loading indicator
+                      MyButton(
+                    isLoading: authController.isLoading.value,
+                    onTap: () async {
+                      await authController.signIn(
+                        emailController.text.trim(),
+                        passwordController.text.trim(),
+                      );
+                    },
+                    text: "Login",
+                  );
+                }),
                 TextButton(
                   onPressed: () {
-                    Get.off(() =>
-                        SignupPage()); // Navigate back to the login page or any previous page
+                    Get.off(() => SignupPage());
                   },
-                  child: Text("Don't have an account? SignUp here"),
+                  child: Text("Don't have an account? Sign Up here"),
                 ),
               ],
             ),

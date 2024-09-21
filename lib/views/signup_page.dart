@@ -43,25 +43,27 @@ class SignupPage extends StatelessWidget {
                   obscureText: true,
                 ),
                 SizedBox(height: 20),
-                MyButton(
-                  onTap: () async {
-                    if (passwordController.text ==
-                        confirmPasswordController.text) {
-                      await authController.signUp(
-                        emailController.text.trim(),
-                        passwordController.text.trim(),
-                      );
-                    } else {
-                      Get.snackbar("Error", "Passwords do not match");
-                    }
-                  },
-                  text: "Sign Up",
-                ),
+                Obx(() {
+                  return MyButton(
+                    isLoading: authController.isLoading.value,
+                    onTap: () async {
+                      if (passwordController.text ==
+                          confirmPasswordController.text) {
+                        await authController.signUp(
+                          emailController.text.trim(),
+                          passwordController.text.trim(),
+                        );
+                      } else {
+                        Get.snackbar("Error", "Passwords do not match");
+                      }
+                    },
+                    text: "Sign Up",
+                  );
+                }),
                 SizedBox(height: 20),
                 TextButton(
                   onPressed: () {
-                    Get.off(() =>
-                        LoginPage()); // Navigate back to the login page or any previous page
+                    Get.off(() => LoginPage());
                   },
                   child: Text("Already have an account? Login here"),
                 ),

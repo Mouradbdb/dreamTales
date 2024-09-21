@@ -11,12 +11,21 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Home Page'),
         actions: [
-          IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: () async {
-              await authController.signOut(); // Sign out user
-            },
-          ),
+          Obx(() {
+            return authController.isLoading.value
+                ? Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    ),
+                  )
+                : IconButton(
+                    icon: Icon(Icons.logout),
+                    onPressed: () async {
+                      await authController.signOut(); // Sign out user
+                    },
+                  );
+          }),
         ],
       ),
       body: Center(

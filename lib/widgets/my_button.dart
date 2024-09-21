@@ -15,7 +15,7 @@ class MyButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
         ),
         width: double.infinity,
-        height: 40,
+        height: 60,
         child: Center(child: Text(text)),
       ),
     );

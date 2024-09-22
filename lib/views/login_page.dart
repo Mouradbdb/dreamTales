@@ -14,12 +14,14 @@ class LoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  LoginPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          AuthAppBar(text: "Welcome Back"),
+          const AuthAppBar(text: "Welcome Back"),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 40),
             child: Column(
@@ -28,13 +30,13 @@ class LoginPage extends StatelessWidget {
                   controller: emailController,
                   labelText: 'Email',
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 OutlineTextfield(
                   controller: passwordController,
                   labelText: 'Password',
                   obscureText: true,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Obx(() {
                   return MyButton(
                     isLoading: authController.isLoading.value,
@@ -51,14 +53,14 @@ class LoginPage extends StatelessWidget {
                   onPressed: () {
                     Get.off(() => SignupPage());
                   },
-                  child: Text("Don't have an account? Sign Up here"),
+                  child: const Text("Don't have an account? Sign Up here"),
                 ),
                 TextButton(
                   onPressed: () {
                     Get.to(() =>
                         ResetPasswordPage()); // Navigate to Reset Password Page
                   },
-                  child: Text("Forgot your password? Reset here"),
+                  child: const Text("Forgot your password? Reset here"),
                 ),
               ],
             ),

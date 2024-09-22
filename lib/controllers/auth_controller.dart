@@ -13,7 +13,7 @@ class AuthController extends GetxController {
     super.onInit();
   }
 
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   var isLoading = false.obs;
 
   // Sign In method
@@ -21,7 +21,7 @@ class AuthController extends GetxController {
     try {
       isLoading(true);
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      Get.offAll(() => HomePage()); // Navigate to HomePage on success
+      Get.offAll(() =>  HomePage()); // Navigate to HomePage on success
     } catch (e) {
       Get.snackbar('Error', e.toString());
     } finally {
@@ -35,7 +35,7 @@ class AuthController extends GetxController {
       isLoading(true);
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      Get.offAll(() => HomePage()); // Navigate to HomePage on success
+      Get.offAll(() =>  HomePage()); // Navigate to HomePage on success
     } catch (e) {
       Get.snackbar('Error', e.toString());
     } finally {

@@ -10,12 +10,14 @@ class ResetPasswordPage extends StatelessWidget {
       Get.put<AuthController>(AuthController());
   final TextEditingController emailController = TextEditingController();
 
+  ResetPasswordPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          AuthAppBar(text: "Reset Password"),
+          const AuthAppBar(text: "Reset Password"),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 40),
             child: Column(
@@ -24,7 +26,7 @@ class ResetPasswordPage extends StatelessWidget {
                   controller: emailController,
                   labelText: 'Email',
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Obx(() {
                   return MyButton(
                     isLoading: authController.isLoading.value,
@@ -35,12 +37,12 @@ class ResetPasswordPage extends StatelessWidget {
                     text: "Send Reset Link",
                   );
                 }),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextButton(
                   onPressed: () {
                     Get.back(); // Navigate back to the previous page (Login Page)
                   },
-                  child: Text("Back to Login"),
+                  child: const Text("Back to Login"),
                 ),
               ],
             ),

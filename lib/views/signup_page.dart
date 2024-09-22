@@ -15,12 +15,14 @@ class SignupPage extends StatelessWidget {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
+  SignupPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          AuthAppBar(text: "Create An Account"),
+          const AuthAppBar(text: "Create An Account"),
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
@@ -30,19 +32,19 @@ class SignupPage extends StatelessWidget {
                   controller: emailController,
                   labelText: 'Email',
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 OutlineTextfield(
                   controller: passwordController,
                   labelText: 'Password',
                   obscureText: true,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 OutlineTextfield(
                   controller: confirmPasswordController,
                   labelText: 'Confirm Password',
                   obscureText: true,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Obx(() {
                   return MyButton(
                     isLoading: authController.isLoading.value,
@@ -60,12 +62,12 @@ class SignupPage extends StatelessWidget {
                     text: "Sign Up",
                   );
                 }),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextButton(
                   onPressed: () {
                     Get.off(() => LoginPage());
                   },
-                  child: Text("Already have an account? Login here"),
+                  child: const Text("Already have an account? Login here"),
                 ),
               ],
             ),

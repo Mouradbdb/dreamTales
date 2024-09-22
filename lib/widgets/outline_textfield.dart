@@ -15,7 +15,7 @@ class OutlineTextfield extends StatelessWidget {
     return TextField(
       obscureText: obscureText ?? false,
       decoration: InputDecoration(
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         labelText: labelText,
       ),
       controller: controller,

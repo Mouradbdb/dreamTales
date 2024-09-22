@@ -11,7 +11,7 @@ class AuthAppBar extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.onTertiaryContainer,
-        borderRadius: BorderRadius.vertical(
+        borderRadius: const BorderRadius.vertical(
           bottom: Radius.circular(20),
         ),
       ),

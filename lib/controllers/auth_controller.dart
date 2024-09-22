@@ -1,57 +1,72 @@
-import 'package:dreamtales/services/auth_sevices.dart';
+import 'package:dreamtales/views/home_page.dart';
+import 'package:dreamtales/views/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
-  // Firebase user
-  Rx<User?> firebaseUser = Rx<User?>(null);
-
-  // Loading state
-  RxBool isLoading = false.obs;
-
-  // Inject FirebaseAuthService
-  final FirebaseAuthService authService =
-      Get.put<FirebaseAuthService>(FirebaseAuthService());
+  var firebaseUser = Rx<User?>(null);
 
   @override
   void onInit() {
-    firebaseUser.bindStream(authService.user); // Listen to user stream
+    firebaseUser.bindStream(FirebaseAuth.instance.authStateChanges());
+
     super.onInit();
   }
 
-  // Sign in method
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  var isLoading = false.obs;
+
+  // Sign In method
   Future<void> signIn(String email, String password) async {
     try {
-      isLoading.value = true; // Start loading
-      await authService.signIn(email, password);
+      isLoading(true);
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      Get.offAll(() => HomePage()); // Navigate to HomePage on success
     } catch (e) {
-      Get.snackbar("Error signing in", e.toString());
+      Get.snackbar('Error', e.toString());
     } finally {
-      isLoading.value = false; // Stop loading
+      isLoading(false);
     }
   }
 
-  // Sign up method
+  // Sign Up method
   Future<void> signUp(String email, String password) async {
     try {
-      isLoading.value = true; // Start loading
-      await authService.signUp(email, password);
+      isLoading(true);
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      Get.offAll(() => HomePage()); // Navigate to HomePage on success
     } catch (e) {
-      Get.snackbar("Error signing up", e.toString());
+      Get.snackbar('Error', e.toString());
     } finally {
-      isLoading.value = false; // Stop loading
+      isLoading(false);
     }
   }
 
-  // Sign out method
+  // Sign Out method
   Future<void> signOut() async {
     try {
-      isLoading.value = true; // Start loading
-      await authService.signOut();
+      isLoading(true);
+      await _auth.signOut();
+      Get.offAll(() => LoginPage()); // Navigate back to LoginPage
     } catch (e) {
-      Get.snackbar("Error signing out", e.toString());
+      Get.snackbar('Error', e.toString());
     } finally {
-      isLoading.value = false; // Stop loading
+      isLoading(false);
+    }
+  }
+
+  // Reset Password method
+  Future<void> resetPassword(String email) async {
+    try {
+      isLoading(true);
+      await _auth.sendPasswordResetEmail(email: email);
+      Get.snackbar(
+          'Success', 'Password reset email sent! Please check your inbox.');
+    } catch (e) {
+      Get.snackbar('Error', e.toString());
+    } finally {
+      isLoading(false);
     }
   }
 }

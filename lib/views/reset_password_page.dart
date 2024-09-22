@@ -1,5 +1,3 @@
-import 'package:dreamtales/views/signup_page.dart';
-import 'package:dreamtales/views/reset_password_page.dart'; // Import the ResetPasswordPage
 import 'package:dreamtales/widgets/auth_appbard.dart';
 import 'package:dreamtales/widgets/my_button.dart';
 import 'package:dreamtales/widgets/outline_textfield.dart';
@@ -7,19 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/auth_controller.dart';
 
-class LoginPage extends StatelessWidget {
+class ResetPasswordPage extends StatelessWidget {
   final AuthController authController =
       Get.put<AuthController>(AuthController());
-
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          AuthAppBar(text: "Welcome Back"),
+          AuthAppBar(text: "Reset Password"),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 40),
             child: Column(
@@ -29,36 +25,22 @@ class LoginPage extends StatelessWidget {
                   labelText: 'Email',
                 ),
                 SizedBox(height: 20),
-                OutlineTextfield(
-                  controller: passwordController,
-                  labelText: 'Password',
-                  obscureText: true,
-                ),
-                SizedBox(height: 20),
                 Obx(() {
                   return MyButton(
                     isLoading: authController.isLoading.value,
                     onTap: () async {
-                      await authController.signIn(
-                        emailController.text.trim(),
-                        passwordController.text.trim(),
-                      );
+                      await authController
+                          .resetPassword(emailController.text.trim());
                     },
-                    text: "Login",
+                    text: "Send Reset Link",
                   );
                 }),
+                SizedBox(height: 20),
                 TextButton(
                   onPressed: () {
-                    Get.off(() => SignupPage());
+                    Get.back(); // Navigate back to the previous page (Login Page)
                   },
-                  child: Text("Don't have an account? Sign Up here"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Get.to(() =>
-                        ResetPasswordPage()); // Navigate to Reset Password Page
-                  },
-                  child: Text("Forgot your password? Reset here"),
+                  child: Text("Back to Login"),
                 ),
               ],
             ),

@@ -12,5 +12,4 @@ DreamTales is a Flutter-based mobile app designed to generate unique, AI-powered
 ## Future Enhancements
 
 - **Story Images:** Generate images related to the story content.
-- **Monetization:** Integrate ads to monetize the app.
-- **Social Sharing:** Allow users to share stories on social media or with friends.
+- **Monetization:** Integrate ads to monetize the app.- **Social Sharing:** Allow users to share stories on social media or with friends.
